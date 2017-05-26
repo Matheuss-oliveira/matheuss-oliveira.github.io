@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cool Snake</title>
+	<link rel="stylesheet" type="text/css" href="snake.css">
+</head>
+<body>
+	<div class = "bigbox">
+	
+	
+	<script type="text/javascript">
+		 
+
+
+		comida = [];
+		var direcao = 'rigth';
+		var food = document.createElement("food");
+		food.className = "food";
+		document.body.appendChild(food);
+
+		var cobrinha       = document.createElement('cobra');
+		cobrinha.className = "cobrinha";
+		cobrinha.corpo 	   = [[6, 1], [5, 1], [4, 1], [3, 1], [2, 1], [1, 1]];
+		
+		drawSanke(cobrinha.corpo);	
+		foodRend();
+		
+		//FUNCAO PARA VERIFICAR ARRAY DENTRO DO ARRAY
+		function searchForArray(haystack, needle){
+		  var i, j, current;
+		  for(i = 0; i < haystack.length; ++i){
+		    if(needle.length === haystack[i].length){
+		      current = haystack[i];
+		      for(j = 0; j < needle.length && needle[j] === current[j]; ++j);
+		      if(j === needle.length)
+		        return true;
+		    }
+		  }
+		  return false;
+		}
+		//FUNCAO PARA VERIFICAR ARRAY DENTRO DO ARRAY
+
+
+
+		function foodRend(){
+			
+			do{
+				comida[0] = Math.floor((Math.random()*50));
+				comida[1] = Math.floor((Math.random()*50));
+				food.style.left = (comida[0]*10 ) + "px";  
+				food.style.top  = (comida[1]*10 ) + "px";
+			}
+			while(searchForArray(cobrinha.corpo, [comida[0], comida[1]]));
+
+		}
+
+
+
+		function drawSanke(){
+			var elements = document.getElementsByTagName('membro')
+			while (elements[0]) elements[0].parentNode.removeChild(elements[0])	
+
+
+			for (var i = 0; i < cobrinha.corpo.length; i ++){
+				var membro = document.createElement("membro");
+				membro.className = "membro";
+				membro.style.left = (cobrinha.corpo[i][0]*10 ) + "px";  
+				membro.style.top  = (cobrinha.corpo[i][1]*10 ) + "px";
+				document.body.appendChild(membro);
+			}
+		}
+
+
+		
+		addEventListener("keydown",  
+			function (event){
+				event.preventDefault;
+				move(event.keyCode);
+			});
+
+
+		setInterval(function(){move(direcao)},90);
+			
+
+
+
+		function move(tecla){
+
+				var size = cobrinha.corpo.length;	
+				var left = cobrinha.corpo[0][0];
+				var top  = cobrinha.corpo[0][1];
+				var last = cobrinha.corpo[size - 1].slice();
+
+				
+				switch(tecla) {
+					
+					case('rigth'):
+				    case (39):
+				    	if (direcao == "left"){break;}
+				        cobrinha.corpo[size - 1][0]  = left + 1;
+				        cobrinha.corpo[size - 1][1]  = top;
+				        direcao = 'rigth';
+				 		      
+				        cycle(last);
+				        break;
+
+				    case('left'):
+				    case (37):
+				    	if (direcao == "rigth"){break;}
+				        cobrinha.corpo[size - 1][0] = left - 1;
+				        cobrinha.corpo[size - 1][1] = top;
+				        
+				        direcao = 'left';
+				        cycle(last);
+				        break;
+
+				    case ('up'):
+			        case (38):
+			        	if (direcao == "down"){break;}
+				        cobrinha.corpo[size - 1][0] = left;
+				        cobrinha.corpo[size - 1][1] = top - 1;
+				        
+				        direcao = 'up';
+				        cycle(last);
+				        break;
+
+				    case ('down'):
+				    case (40):
+				    	if (direcao == "up"){break;}
+				        cobrinha.corpo[size - 1][0] = left;
+				        cobrinha.corpo[size - 1][1] = top + 1;
+				        
+				        direcao = 'down'
+				        cycle(last);
+				        break;						       
+				}
+
+		
+			
+
+
+
+				//ver se ela se bateu == dois membros no mesmo espaço 
+			    var i, j,
+			        count = 0;
+			    for (i = 0, j = cobrinha.corpo.length; i < j; i++) {
+			        (cobrinha.corpo[i][0] == cobrinha.corpo[0][0] && cobrinha.corpo[i][1] == cobrinha.corpo[0][1]) && count++;				      
+			    }
+
+				var left = cobrinha.corpo[0][0];
+				var top  = cobrinha.corpo[0][1];
+
+			    
+				    
+			    // ver se bateu na parede
+				if (left < 0 || top < 0 || left > 49 || top > 49 || count == 2){
+					alert("Vous êtes mort! Réessayez Connard.");
+					window.location.reload();
+							
+				}	    
+				
+
+				//comendo comidinha
+				
+				
+					
+
+
+			
+				function cycle(last){
+
+					//comendo comidinha
+					
+					//console.log(last + "  " + cobrinha.corpo[size -1]);
+
+					cobrinha.corpo.unshift(cobrinha.corpo.pop());  
+					drawSanke(cobrinha.corpo);
+
+
+					if (cobrinha.corpo[0][0]  == comida[0] && cobrinha.corpo[0][1] == comida[1]){
+						cobrinha.corpo.push(last);
+						foodRend();
+					}
+
+
+					
+					
+					
+				}
+				
+
+
+
+				
+				
+			};
+			
+		
+		
+		
+		
+
+
+	</script>
+
+
+
+</body>
+</html>

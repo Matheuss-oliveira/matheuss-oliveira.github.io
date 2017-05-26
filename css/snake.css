@@ -1,0 +1,43 @@
+body {
+  background-color: black;
+}
+
+
+.bigbox {
+ 	border: 1px solid green ;
+ 	width:500px;
+	height:500px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+
+} 
+
+p{
+	color: green;
+}
+
+.comida{
+	height: 10px; 
+	width: 10px;
+	background: red;
+	position: absolute;
+
+}
+
+
+
+.food{
+	height: 10px; 
+	width: 10px;
+	background: red;
+	position: absolute;
+}
+
+.membro{
+	height: 10px; 
+	width: 10px;
+	background: white;
+	position: absolute;
+}
+
