@@ -1,11 +1,6 @@
 
-//TODOS
-//TESTES
-//TESTES
-//DUVIDAS : variaveis globais e locais 
 
-
-function initializate(){
+function initializateSnakeAndFood(){
     comida_position = [];
     direcao = 39;//direita
 
@@ -25,7 +20,7 @@ function initializate(){
 
   
 
-  initializate();
+  initializateSnakeAndFood();
   
 
 
